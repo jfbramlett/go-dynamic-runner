@@ -1,4 +1,4 @@
-module github.com/jfbramlett/grpc-example
+module github.com/jfbramlett/go-dynamic-runner
 
 require (
 	github.com/golang/protobuf v1.3.1
