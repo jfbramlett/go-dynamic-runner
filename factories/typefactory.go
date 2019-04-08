@@ -13,8 +13,8 @@ type TypeFactory interface {
 	Close()
 }
 
-func GetTypeFactory() TypeFactory {
-	typeFactory := &grpcTypeFactory{}
+func getDefaultTypeFactory() TypeFactory {
+	typeFactory := &defaultTypeFactory{}
 	typeFactory.registerTypes()
 	return typeFactory
 }
@@ -31,12 +31,12 @@ func GetTypeName(typ reflect.Type) string {
 	return typeName
 }
 
-type grpcTypeFactory struct {
+type defaultTypeFactory struct {
 	typeMap 		map[string]InstanceCreator
 }
 
 
-func (g *grpcTypeFactory) GetInstanceCreator(name string) (InstanceCreator, error) {
+func (g *defaultTypeFactory) GetInstanceCreator(name string) (InstanceCreator, error) {
 	t, found := g.typeMap[name]
 
 	if !found {
@@ -46,7 +46,7 @@ func (g *grpcTypeFactory) GetInstanceCreator(name string) (InstanceCreator, erro
 	}
 }
 
-func (g *grpcTypeFactory) GetInstanceCreatorForType(typ reflect.Type) (InstanceCreator, error) {
+func (g *defaultTypeFactory) GetInstanceCreatorForType(typ reflect.Type) (InstanceCreator, error) {
 	typeName := typ.String()
 	if strings.HasPrefix(typeName, "*") {
 		typeName = typeName[1:]
@@ -54,15 +54,18 @@ func (g *grpcTypeFactory) GetInstanceCreatorForType(typ reflect.Type) (InstanceC
 	return g.GetInstanceCreator(typeName)
 }
 
-func (g *grpcTypeFactory) Close() {}
+func (g *defaultTypeFactory) Close() {}
 
-func (g *grpcTypeFactory) registerTypes() {
+func (g *defaultTypeFactory) registerTypes() {
 	g.typeMap = make(map[string]InstanceCreator)
 
 	g.typeMap["context.Context"] = newContextInstanceCreator()
 }
 
 
-func (g *grpcTypeFactory) RegisterType(typeName string, instanceCreator InstanceCreator) {
+func (g *defaultTypeFactory) RegisterType(typeName string, instanceCreator InstanceCreator) {
 	g.typeMap[typeName] = instanceCreator
 }
+
+
+var GlobalTypeFactory = getDefaultTypeFactory()

@@ -21,23 +21,16 @@ type basicSuiteRunner struct {
 func (f *basicSuiteRunner) Run() []RunResult {
 	testResults := make([]RunResult, 0)
 
-	clientFactory := factories.GetClientFactory()
-	typeFactory := factories.GetTypeFactory()
-	validatorFactory := valid.GetValidatorFactory()
-
 	for _, runDef := range f.runSuiteDef.Tests {
-		validator, err := getValidator(runDef, validatorFactory)
+		validator, err := getValidator(runDef, valid.GlobalValidatorFactory)
 		if err != nil {
 			testResults = append(testResults, RunResult{Name: runDef.Name, Passed: false, Error: fmt.Errorf("failed to find configured validator %s", runDef.Validator)})
 			continue
 		}
-		runner := f.runnerFactory.GetRunner(f.runSuiteDef, runDef, typeFactory, clientFactory, validator)
+		runner := f.runnerFactory.GetRunner(f.runSuiteDef, runDef, factories.GlobalTypeFactory, factories.GlobalClientFactory, validator)
 		result := runner.Run()
 		testResults = append(testResults, result)
 	}
-
-	clientFactory.Close()
-	typeFactory.Close()
 
 	return testResults
 }
