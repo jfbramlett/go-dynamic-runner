@@ -17,7 +17,7 @@ func (i *reflectionInstanceCreator) NewInstance() interface{} {
 	return reflect.New(i.typeOf).Interface()
 }
 
-func newReflectionInstanceCreator(ins interface{}) InstanceCreator {
+func NewReflectionInstanceCreator(ins interface{}) InstanceCreator {
 	return &reflectionInstanceCreator{typeOf: reflect.TypeOf(ins)}
 }
 
