@@ -3,8 +3,8 @@ package runner
 import (
 	"fmt"
 	"github.com/jfbramlett/faker/fakegen"
-	"github.com/jfbramlett/grpc-example/factories"
-	valid "github.com/jfbramlett/grpc-example/validator"
+	"github.com/jfbramlett/go-dynamic-runner/factories"
+	valid "github.com/jfbramlett/go-dynamic-runner/validator"
 	"log"
 	"reflect"
 	"testing"

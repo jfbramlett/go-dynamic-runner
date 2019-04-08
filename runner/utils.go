@@ -3,8 +3,8 @@ package runner
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jfbramlett/grpc-example/factories"
-	valid "github.com/jfbramlett/grpc-example/validator"
+	"github.com/jfbramlett/go-dynamic-runner/factories"
+	valid "github.com/jfbramlett/go-dynamic-runner/validator"
 	"io/ioutil"
 	"log"
 	"reflect"
