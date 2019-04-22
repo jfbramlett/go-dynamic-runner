@@ -3,29 +3,9 @@ Library that can be used to dynamically execute one or more Go methods with a fo
 
 
 # Run the sample code
-To compile and run the server, assuming you are in the root of the route_guide
-folder, i.e., .../examples/route_guide/, simply:
+1. Generate the proto using the make_proto.sh
+2. Run example.go from cmd/example
 
-```sh
-$ go run server/server.go
-```
+The main takes 1 argument, --server to run the server and --client to run the client
 
-Likewise, to run the client:
-
-```sh
-$ go run client/client.go
-```
-
-# Optional command line flags
-The server and client both take optional command line flags. For example, the
-client and server run without TLS by default. To enable TLS:
-
-```sh
-$ go run server/server.go -tls=true
-```
-
-and
-
-```sh
-$ go run client/client.go -tls=true
-```
+The client will use the configuration defined in client/testdata/runsuite.json to run a set of methods against the server.

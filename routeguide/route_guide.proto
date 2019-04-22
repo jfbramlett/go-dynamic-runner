@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.routeguide";
+option java_outer_classname = "RouteGuideProto";
+
+package routeguide;
+
+message RouteRequest {
+    string destination = 1;
+    string email = 2;
+    int32 userid = 3;
+}
+
+message RouteDetails {
+    int32 routeid = 1;
+    string location = 2;
+    string traveler_email = 3;
+    int32 stops = 4;
+}
+
+// Interface exported by the server.
+service RouteGuide {
+    rpc FindRoute(RouteRequest) returns (RouteDetails) {}
+}
