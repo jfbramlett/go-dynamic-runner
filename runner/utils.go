@@ -3,8 +3,6 @@ package runner
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/jfbramlett/go-dynamic-runner/factories"
-	valid "github.com/jfbramlett/go-dynamic-runner/validator"
 	"io/ioutil"
 	"log"
 	"reflect"
@@ -29,7 +27,7 @@ func buildRunSuiteFromFile(configFile string) (RunSuiteDef, error) {
 }
 
 // function used to build a run suite given a type - this uses reflection to identify the methods to wrap
-func buildRunSuiteFromType(interfaceType reflect.Type, globalValues map[string]interface{}, globalTags map[string]string, excludes []string) (RunSuiteDef, error) {
+func buildRunSuiteFromType(interfaceType reflect.Type, globalValues map[string]interface{}, globalTags map[string]string, excludes []string, clients map[string]interface{}) (RunSuiteDef, error) {
 	runSuite := RunSuiteDef{Tests: make([]RunDef, 0), GlobalValues: globalValues, GlobalTags: globalTags}
 
 	for i := 0; i < interfaceType.NumMethod(); i++ {
@@ -39,25 +37,12 @@ func buildRunSuiteFromType(interfaceType reflect.Type, globalValues map[string]i
 				continue
 			}
 		}
-		runSuite.Tests = append(runSuite.Tests, RunDef{Name: fmt.Sprintf(" Test %s.%s", factories.GetTypeName(interfaceType), methodName),
-			ClientClassName: factories.GetTypeName(interfaceType),
+		runSuite.Tests = append(runSuite.Tests, RunDef{Name: fmt.Sprintf(" Test %T.%s", interfaceType, methodName),
 			FunctionName: methodName,
+			ClientClassName: "",
+			Args: make(map[string]FunctionArg),
 		})
 
 	}
 	return runSuite, nil
 }
-
-
-func getValidator(runDef RunDef, validatorFactory valid.ValidatorFactory) (valid.Validator, error) {
-	if runDef.Validator == "" {
-		return &valid.DefaultValidator{}, nil
-	} else {
-		validator, err := validatorFactory.GetValidator(runDef.Validator)
-		if err != nil {
-			return nil, err
-		}
-		return validator, nil
-	}
-}
-

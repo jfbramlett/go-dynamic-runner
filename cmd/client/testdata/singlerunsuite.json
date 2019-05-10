@@ -1,0 +1,21 @@
+{
+  "repeats": 10000,
+  "runDefinitions": [
+    {
+      "name": "test1",
+      "clientClassName": "routeguide.RouteGuideClient",
+      "functionName": "FindRoute",
+      "args": {
+        "routeguide.RouteRequest": {
+          "valuesOverride": {"Destination":  "UNC"}
+        }
+      }
+    }
+  ],
+  "globalTags" : {
+    "Email" : "email"
+  },
+  "globalValues": {
+    "Userid": 15
+  }
+}

@@ -1,6 +1,7 @@
 {
   "runDefinitions": [
     {
+      "name": "test1",
       "clientClassName": "routeguide.RouteGuideClient",
       "functionName": "FindRoute",
       "args": {
@@ -10,6 +11,47 @@
       }
     },
     {
+      "name": "test2",
+      "clientClassName": "routeguide.RouteGuideClient",
+      "functionName": "FindRoute"
+    },
+    {
+      "name": "test3",
+      "clientClassName": "routeguide.RouteGuideClient",
+      "functionName": "FindRoute"
+    },
+    {
+      "name": "test4",
+      "clientClassName": "routeguide.RouteGuideClient",
+      "functionName": "FindRoute"
+    },
+    {
+      "name": "test5",
+      "clientClassName": "routeguide.RouteGuideClient",
+      "functionName": "FindRoute"
+    },
+    {
+      "name": "test6",
+      "clientClassName": "routeguide.RouteGuideClient",
+      "functionName": "FindRoute"
+    },
+    {
+      "name": "test7",
+      "clientClassName": "routeguide.RouteGuideClient",
+      "functionName": "FindRoute"
+    },
+    {
+      "name": "test8",
+      "clientClassName": "routeguide.RouteGuideClient",
+      "functionName": "FindRoute"
+    },
+    {
+      "name": "test9",
+      "clientClassName": "routeguide.RouteGuideClient",
+      "functionName": "FindRoute"
+    },
+    {
+      "name": "test10",
       "clientClassName": "routeguide.RouteGuideClient",
       "functionName": "FindRoute"
     }

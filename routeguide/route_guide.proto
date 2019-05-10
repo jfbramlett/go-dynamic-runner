@@ -6,10 +6,18 @@ option java_outer_classname = "RouteGuideProto";
 
 package routeguide;
 
+message Pagination {
+    int32 size = 1;
+    int32 pageNum = 2;
+}
+
 message RouteRequest {
     string destination = 1;
     string email = 2;
     int32 userid = 3;
+    string trip_home = 4;
+    string uuid = 5;
+    Pagination pagination = 6;
 }
 
 message RouteDetails {
